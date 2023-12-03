@@ -2,443 +2,597 @@
 <html>
 <head>
 <meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
-<title>情感分析app分析</title>
+
+<link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.428571; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-size-adjust: inherit; font-kerning: inherit; font-variant-alternates: inherit; font-variant-ligatures: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-position: inherit; font-feature-settings: inherit; font-optical-sizing: inherit; font-variation-settings: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right-width: 0px; border-right-style: none; border-right-color: currentcolor; background-color: inherit; }
+.CodeMirror-linenumber { }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: medium; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: medium !important; border-style: none !important; border-color: currentcolor !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom-width: 0px; border-bottom-style: none; border-bottom-color: currentcolor; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: medium; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.428571rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left-width: 28px; border-left-style: solid; border-left-color: transparent; border-right-width: 28px; border-right-style: solid; border-right-color: transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right-width: 8px; border-right-style: solid; border-right-color: transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+
+
+ @media print { @page {margin: 0 0 0 0;} body.typora-export {padding-left: 0; padding-right: 0;} #write {padding:0;}}
+</style><title>HMW</title>
 </head>
-<body><h1 id='情感分析app分析'>情感分析app分析</h1>
-<p>本小组由史惠敏、王乾润、苗琳瑜采访了6位受访者，关于他们对情感分析app的分析情况，由陈炜麟对这些采访稿进行汇总，并发布survey调查问卷，最后汇总制作成网页。</p>
-<h2 id='采访稿'>采访稿</h2>
-<p><strong>------1、2、3、4、5、6分别代表不同的受访者</strong></p>
-<h3 id='介绍'>介绍</h3>
-<p><strong>用户您好，感谢您留出时间参与我们的采访。我们即将推出一个移动应用程序</strong> 
-<strong>情感助手。现在我们想对您进行采访以调查用户的需求和意见，如果我使用您的回复作为我们项目的一部分可以吗？</strong> </p>
-<p><strong>您可能会觉得我的一些问题太私人了，如果您对回答这些问题感到不舒服您可以告诉我，我会继续进行后续采访。在我开始之前您还有什么疑问吗？</strong></p>
-<p><u>1没什么疑问，可以开始了</u></p>
-<p><u>2好的，没什么问题，我们可以开始</u></p>
-<p><u>3没，你问吧，有些可能答不上来</u></p>
-<p><u>4没问题，开始吧</u></p>
-<p><u>5你问吧，我尽力回答</u></p>
-<p><u>6没有，我们继续。</u></p>
-<h3 id='热身'>热身</h3>
-<p><strong>您现在是学生还是已经参加工作？您觉得自己手机上应用程序多吗？</strong></p>
-<p><u>1我目前是一名即将毕业的大学生。我个人觉得自己手机上app并不多，因为许多热门的app我都没有下载，因为不是很感兴趣。我一般只下载比较实用的，如果不经常使用我就会很快清理掉。</u></p>
-<p><u>2我目前是一名大一学生，不是很多，感觉app占内存</u>
-<u>3我目前是一名大四学生，有很多app，游戏之类的娱乐app居多，其他的用完不常用了我就卸载了。</u>
-<u>4大四学生，只留下必要的app和我需要持续登录的/充了钱的app，其他的用完就卸载，什么时候用什么时候安装，能用小程序或者网页版就不下载app，看着很乱。</u></p>
-<p><u>5是的，我还是学生。没有数过，但感觉不少，常用的其实也就少数几个。</u></p>
-<p><u>6我今年刚刚毕业入职。我手机上app数量有点多，有很多平时工作会用到的app，还有一些用来放松娱乐的app。</u></p>
-<p><strong>您一般会去应用商店下载一些看起来有趣的应用程序吗？当听到情感助手这个词时，您认为它会是个什么样的应用程序？</strong></p>
-<p><u>1有趣的应用有时候也会下，但是我更看重实用性，如果对我的生活确实有用，我一定会是它的长期忠实用户。情感助手听起来感觉是个帮人分析情感问题的app，就像网络心理医生一样。</u></p>
-<p><u>2不会。只下载需要的。我觉得是打开可能给你推送什么“正能量”的内容比如鸡汤之类的？但说实话我会担心它像是韩国的那个桥一样，越是鼓励大家“为了什么活下去、坚持下去”，可能适得其反，因为AI不像是人，它不可能很确切的共情然后给出合理反应吧，可能它认为是正能量的东西反而刺激了用户呢。</u>
-<u>3不会。我感觉，这是个那种心理测试之类的app吗？就帮你分析的话不是有很多那种做测试题给你分析你的心理状态的？</u>
-<u>4也许吧，不经常，有趣的怕不安全，很多app又觉得没必要。我觉得像华为智慧助手那样的，监测你的手机然后有时候发现你精神状态不行叮地蹦出来，给你一点什么提示之类的。</u></p>
-<p><u>5会的。苹果手机的AppStore我觉得很不错，有时候我就会去里面淘一些app来看看。应该是根据某些信息来判断你的情绪状态，然后给你一些相关建议去改善情绪这类的助手吧。</u></p>
-<p><u>6一般不会自己看到有趣的app就下载，通常都是很多人推荐的app我才会下载。情感助手听起来是解决情感问题的，难道是提供情感安慰的app?</u></p>
-<h3 id='主题-1情绪分析中调度管理的需求'>主题 1：情绪分析中调度管理的需求</h3>
-<h4 id='q1-您在日常生活中是否经常面临情绪波动或情绪压力'>Q1. 您在日常生活中是否经常面临情绪波动或情绪压力？ </h4>
-<p><u>1肯定有压力吧，大家都会有，但我不会怎么内耗，情绪波动也不大。</u></p>
-<p><u>2有时候有压力但不会焦虑，我比较心大，没什么负面情绪波动，比较佛。</u></p>
-<p><u>3经常有，持续内耗，情绪压力很大，情绪波动频繁，挺难受的。</u></p>
-<p><u>4情绪波动和压力肯定是有的，但是不太经常，我的情绪还是比较稳定的。</u></p>
-<p><u>5我感觉在日常生活中经常有各种原因产生的压力，情绪波动的情况也比较多。</u></p>
-<p><u>6经常。从校园步入职场，有很多不适应的地方，一切都要从头学起，每天压力巨大。</u> </p>
-<h4 id='follow-up可以谈谈情绪波动或压力的具体原因吗比如说学习很紧张或工作压力大之类的'>Follow up：可以谈谈情绪波动或压力的具体原因吗？比如说学习很紧张或工作压力大之类的。</h4>
-<p><u>1在大学四年的生活里，因为没有去实习，所以大部分压力都来自学习。就最近来说，作为即将毕业的大学生面临各种对于未来方向的选择，真的压力很大，经常怀疑自己的选择，怀疑自己是不是不够努力，是不是努力错了方向，是不是都在做无谓的努力。</u></p>
-<p><u>2比如有时候作业距离提交还有几小时，但是自己还没做，这个时候就会比较烦躁。</u></p>
-<p><u>3身边同学都保研很好，自己考研准备的不行，焦虑</u></p>
-<p><u>4父母期待很大，自己达不到父母的预期</u></p>
-<p><u>5一个是学习和复习考研压力大，一方面是情感方面的问题，和女朋友相处不融洽</u></p>
-<p><u>6刚参加工作，无论是工作压力还是人际交往的压力都让我非常难受。</u> </p>
-<h4 id='q2-您觉得情感波动或情感压力对您的日常任务和时间管理有严重的影响吗可以描述一下有多严重吗'>Q2. 您觉得情感波动或情感压力对您的日常任务和时间管理有严重的影响吗？可以描述一下有多严重吗？</h4>
-<p><u>1不大，要做一个理性的人啊，怎么能让这些控制你呢（笑）</u></p>
-<p><u>2不大，我没啥情绪波动</u></p>
-<p><u>3啊严重，可能不累但是人因为焦虑先崩溃了，就完全做不进去事情，身体会很不舒服。很害怕很害怕，然后把事情反而弄砸，就像马上交卷子但还是没写完一样的慌张感，导致了效率的低下，玩也玩不好。</u></p>
-<p><u>4我觉得是的。比如上一个例子的情景，当我比较烦躁时，我的效率会下降，导致我需要比平时更多的时间去完成作业。而且会打乱我的计划，让我不想去按计划去做接下来该做的事情。我觉得有时候它的影响还是比较严重的。</u></p>
-<p><u>5对于我来说影响还是挺大的，我如果情绪很不对劲，学习效率会大幅下降。比如发现学习进度远远落后于其他人，而且复习时间完全不够时，越想越崩溃，就会很想放弃，但这会使本来就落后的复习进度雪上加霜，这非常让人苦恼。</u></p>
-<p><u>6有点严重，但作为一个成年人还是可以克服的，虽然很痛苦。</u> </p>
-<h4 id='q3-您在面对情感波动或情感压力时都是怎样缓解的您对于情感管理技巧如放松方式舒缓策略等）有了解吗'>Q3. 您在面对情感波动或情感压力时都是怎样缓解的？您对于情感管理技巧（如放松方式、舒缓策略等）有了解吗？</h4>
-<p><u>1看喜欢的东西，让自己高兴的东西，比如《天官赐福》那个小说嘛，你懂的，看看就很开心啊。</u></p>
-<p><strong>追问：你会一直看吗？直到缓解？还是怎么样</strong></p>
-<p><u>答：我肯定会限制时间啊，怎么能一直看呢（笑）就你规定自己写四十分钟作业，看20分钟的小说，再写半个小时这样子，就算我高三的时候，我也每天看喜欢的小说，我知道别人在写卷子，但我不care，每个人有每个人的节奏吗，你得找到属于你的节奏啊是吧。</u></p>
-<p><u>2我刷刷抖音，看看名学（某综艺团体），然后就开心了呀</u></p>
-<p><strong>追问：你会一直看吗？直到缓解？还是怎么样</strong></p>
-<p><u>答：emmm……我不太控制的住说实话，会看的比较久</u></p>
-<p><strong>追问：那你这样看完不会更焦虑吗，比如做事情的时间又少了</strong></p>
-<p><u>答：不会啊，我一般不焦虑，其他的心情不好看看这个可以变好，因为忘了嘛。再说为什么要一直有需要做事情这个想法呢，人要有空闲时间的呀。</u></p>
-<p><u>3我会想要发泄的，比如坐过山车、保证安全的前提下把车开的很快、暴打抱枕，偶尔快速跑步。也会和朋友大声的打电话。或者写小说剪视频，把不开心的情绪都放在在这里面的同时，沉浸在创作里就会忘记不好的心情了。只看视频看小说不干事情对我没用。</u> </p>
-<p><u>4我一般会选择向家人朋友倾诉，当得到他们的支持和安慰时，压力会很快排解掉。我了解的一些情感放松方式还有体育锻炼，听说非常有用，三公里就能治好各种心理不适。还有一些购物，吃甜品，写日记，虽然没试过但据说有用。</u></p>
-<p><u>5我有时候会出去跑步缓解压力。平时的话一般是听听音乐或者放下手头的事情打打游戏。比较专业科学的情感管理技巧我不太了解，我觉得这个是一个比较主观的事情，每个人有每个人特定的方式。</u></p>
-<p><u>6我会去健身房，而且我认为这个方法非常有效。我现在还在家附近办了健身房年卡，工作上一有压力我就去那里放松。别的方式的话，我还会选择购物，一次性冲动消费会很解压。</u></p>
-<h4 id='q4-您认为一个手机应用情感分析助手可以为您提供一些怎样的服务来帮您缓解情感压力'>Q4. 您认为一个手机应用情感分析助手可以为您提供一些怎样的服务来帮您缓解情感压力？</h4>
-<p><u>1啊我觉得那些小红书抖音的推荐就挺好的</u></p>
-<p><u>2该说不说我觉得不如刷会抖音</u></p>
-<p><u>3如果可以的话帮我把我不想看的东西一个都别推送，比如我微信聊天说xxx太卷了，那我所有平台别推送这个人和卷的事情。</u></p>
-<p><u>4我希望它能感受到我的情绪问题并且可以提供有用的解决方法，让我的生活不会因为情绪压力变得一团糟。</u></p>
-<p><u>5我能想到的是帮我找一些合适的音乐，或者推荐我一些缓解压力的简单好用的方法。</u></p>
-<p><u>6我觉得它应该通过对我现在情绪状态的分析给出一个合理的解决方案，让我尽快恢复正常。</u></p>
-<h4 id='q5-您希望情感分析助手通过什么方式向您提供情感支持和建议例如文字提示语音指导或其他形式'>Q5. 您希望情感分析助手通过什么方式向您提供情感支持和建议？例如文字提示、语音指导或其他形式？</h4>
-<p><u>1文字吧，难过时候想独处</u></p>
-<p><u>2我希望可以和它视频通话</u></p>
-<p><u>3给我点现实而不是空泛的建议。还有我想要这个东西像人一样陪我，我想要搭建一个属于我的线上小窝，或者这能以我喜欢的纸片人形象和我沟通。</u></p>
-<p><u>4我希望多种形式结合，因为文字提示，语音指导，图片示例，动画演示都有其各自的优点。但是就我个人而言，我对于语音指导更感兴趣，因为语音互动很有亲和力，容易拉近和用户的距离。如果可以做的很优秀，应该会吸引很多和我一样的用户。</u></p>
-<p><u>5文字提示吧。这样不太突兀。</u></p>
-<p><u>6我希望是语音指导和文字演示，前者比较有代入感，后者比较方便高效。</u></p>
-<h4 id='q6-您认为情感分析助手根据情感进行日程安排是否合理是否必要并且讲述一下您的理由'>Q6. 您认为情感分析助手根据情感进行日程安排是否合理，是否必要？并且讲述一下您的理由。</h4>
-<p><u>1啊我觉得我担心隐私</u></p>
-<p><u>2没必要，不需要，不受这个影响</u></p>
-<p><u>3是吧，但我不太相信这个能完美达成预期。我破防的时候失去理性思考规划能力，挺需要的。</u></p>
-<p><u>4我觉得非常合理且有必要，在我遇到巨大的情感压力的时候，会失去对自己生活的掌控力，可能会颓废好几天直到随着时间缓缓恢复，但这期间其实浪费了很多时间，我非常不喜欢这样但没有办法。情感分析助手如果可以在我不能掌控自己生活的时候接管这一项任务，帮我安排一些缓解压力的日程和一些在不同情绪下适合的不同类型任务，那既能帮我尽快走出压力的漩涡，还可以让这段时间过得有意义有价值，这真的是非常让人期待的一个应用呢。</u></p>
-<p><u>5我觉得如果大部分时间情绪稳定的话，这个还是一个不错的想法，或许可以让人的效率更好。但是我觉得这不是必要的。因为每个人都有自己的习惯，一个app不太能了解一个人的全部信息。</u> </p>
-<p><u>6我觉得合理。在工作中遇到压力即使佷崩溃也要继续完成工作，所以在自我管理能力不足时，让它来合理安排日程很有必要。</u></p>
-<h3 id='主题-2用户隐私和安全'>主题 2：用户隐私和安全</h3>
-<h4 id='q1-您了解情绪分析应用程序会如何使用您的数据来提供服务吗如果不清楚您想在哪里找到有关数据使用的更多信息'>Q1. 您了解情绪分析应用程序会如何使用您的数据来提供服务吗？如果不清楚，您想在哪里找到有关数据使用的更多信息？</h4>
-<p><u>1不了解，应该是数据监听，然后app之间可能会收集交换甚至出售数据</u></p>
-<p><u>2不了解，但觉得会麦克风监听。下载的时候我就关了权限。</u></p>
-<p><u>3不了解。设置-权限</u></p>
-<p><u>4这点我确实不是很清楚，我觉得它应该会监控利用我在其他app上的使用信息，还有我的输入文字和语音。我觉得app应该在安装时就告知我它会使用我的哪些信息，以及如何使用，这样用户可以按照接受度选择是否继续使用。</u></p>
-<p><u>5我知道它会利用我的数据，但是怎样利用的我并不清楚。我没太关心过这个。或许在app里设置一个选项可以让人清楚的看到数据是如何被使用的。</u></p>
-<p><u>6我不清楚，我觉得app应该在安装时就告知我，在后续使用也要有相应的提示。</u></p>
-<h4 id='q2-您是否希望情绪分析应用程序提供允许您管理和删除自己的数据的用户控制选项'>Q2. 您是否希望情绪分析应用程序提供允许您管理和删除自己的数据的用户控制选项？</h4>
-<p><u>1是，但恐怕删不了，它难道不会自己存吗</u></p>
-<p><u>2是</u></p>
-<p><u>3是，但觉得删不干净</u></p>
-<p><u>4当然，这必须提供，自己当然要拥有管理自己数据的权限。</u></p>
-<p><u>5我认为可以设置，但是我觉得大部分用户不会使用这个功能。</u></p>
-<p><u>6非常希望。</u> </p>
-<h4 id='q3-您认为政府或其他第三方机构应该有权访问由应用程序收集的数据吗如果是这样您认为应该有什么限制和条件'>Q3. 您认为政府或其他第三方机构应该有权访问由应用程序收集的数据吗？如果是这样，您认为应该有什么限制和条件？</h4>
-<p><u>1无权！</u></p>
-<p><u>2无权</u></p>
-<p><u>3无权，但现实是他们已经这样干了。</u> </p>
-<p><u>4我觉得政府或者第三方不应该有权访问数据，但他们应该具有对数据收集和存储方的监管权限。</u></p>
-<p><u>5我认为它们的权限应该是用户同意赋予的。如果用户不知情的话，那它们不能自私收集数据。可以让它们收集一些非敏感信息吧，并且禁止外传。</u></p>
-<p><u>6我觉得政府或者第三方应该有权访问数据，同时他们也应该具有相应监管权限。</u></p>
-<h4 id='q4-如果应用程序提供个性化的情绪分析建议或反馈您是否愿意允许应用程序访问更多个人信息关于你提供更精准的建议为什么或为什么不呢'>Q4. 如果应用程序提供个性化的情绪分析建议或反馈，您是否愿意允许应用程序访问更多个人信息关于你提供更精准的建议？为什么或为什么不呢？</h4>
-<p><u>1不，我担心隐私泄露。个人隐私不希望收集。虽然注册时候已经窃取了。</u></p>
-<p><u>2不需要建议</u></p>
-<p><u>3可以，反正泄露了不差这一点</u></p>
-<p><u>4如果应用程序可以保证用户的隐私数据不会被泄露，那我当然愿意允许它访问更多个人数据来提供更好的服务。但是大部分的应用很难让人信任。</u></p>
-<p><u>5如果它提出的建议或反馈比较好的话，那我不介意。</u></p>
-<p><u>6我不愿意，我害怕隐私信息泄露。</u></p>
-<h4 id='q5-使用情绪分析应用程序时您最大的隐私问题是什么例如保护个人数据数据泄露隐私政策的透明度等）'>Q5. 使用情绪分析应用程序时，您最大的隐私问题是什么（例如保护个人数据、数据泄露、隐私政策的透明度等）?</h4>
-<p><u>1全方位的担心，担心泄露给第三方</u></p>
-<p><u>2都担心，但都泄露，这很可怕</u></p>
-<p><u>3数据一定会泄露的……</u></p>
-<p><u>4我最担心的就是隐私数据泄露，隐私数据如果被不法分子恶意利用，后果可能会非常严重。</u></p>
-<p><u>5数据泄露吧，感觉别人知道了你的信息然后给你推销或者做一些其他事情很可怕。</u></p>
-<p><u>6我担心隐私数据泄露。</u> </p>
-<h3 id='主题3应用运营模式'>主题3：应用运营模式</h3>
-<h4 id='q1-如果您在使用应用程序时遇到问题您会选择报告问题给开发商吗'>Q1. 如果您在使用应用程序时遇到问题，您会选择报告问题给开发商吗？</h4>
-<p><u>1会，提供服务就得服务到底！</u></p>
-<p><u>2不会，直接注销删除，懒得，没有什么完美解决</u></p>
-<p><u>3看心情</u></p>
-<p><u>4我一般会的，我觉得向开发商报告使用不良体验会让他改善应用从而给我提供更好的服务。</u></p>
-<p><u>5很少，我会重启或者选择其他的方式。</u></p>
-<p><u>6我偶尔会。</u></p>
-<h4 id='follow-up您通常如何提供反馈是评论还是其他什么渠道'>Follow Up：您通常如何提供反馈？是评论还是其他什么渠道？</h4>
-<p><u>1去官方反馈</u></p>
-<p><u>2在评论区吐槽</u></p>
-<p><u>3官方反馈+评论区吐槽</u> </p>
-<p><u>4我通常会使用官方渠道，比如官方在官网设置的用户反馈版块，或者是在应用里直接设置的反馈版块。如果没有官方渠道，那我极大可能就不会反馈了。</u></p>
-<p><u>5我不经常。有的话，一般都是去app的评论区进行反馈。</u></p>
-<p><u>6我在软件安装中心给它评论和打分。</u></p>
-<h4 id='q2-如果您在使用应用程序的过程中遇到问题请问您是否更喜欢一键式反馈或寻求客户服务以寻求答案'>Q2. 如果您在使用应用程序的过程中遇到问题，请问您是否更喜欢一键式反馈或寻求客户服务以寻求答案？</h4>
-<p><u>1一键式为主吧。如果不行的话先人工服务，再人工，都需要</u></p>
-<p><u>2都需要，人工为主</u></p>
-<p><u>3人工，给我实时反馈</u></p>
-<p><u>4当然，简单直接实时的反馈自然会更受喜欢。</u> </p>
-<p><u>5一键反馈吧。这样很方便。</u></p>
-<p><u>6对，我喜欢这种迅速实时的反馈。</u> </p>
-<h4 id='q3-您是否认为有必要在多台设备上同时登陆吗'>Q3. 您是否认为有必要在多台设备上同时登陆吗？ </h4>
-<p><u>1需要</u></p>
-<p><u>2需要，手机电脑平板需要，两个手机有点必要但是不多。</u></p>
-<p><u>3需要，我觉得俩手机互相挤占更好</u></p>
-<p><u>4当然，现在大部分人都会经常使用不同的设备，多台设备同时登陆自然会提供很大方便。</u></p>
-<p><u>5我觉得这很需要。因为现在很多人都有不少设备。</u></p>
-<p><u>6我觉得没有必要，因为我一般不会同时登陆多台设备使用这种app，多设备同时登陆会让我感觉不太安全。</u></p>
-<h4 id='q4-您如何看待应用内广告'>Q4. 您如何看待应用内广告？</h4>
-<p><u>1多了就很讨厌能不能关了</u></p>
-<p><u>2可以接受有，但是不接受多，适当赚钱可以理解</u></p>
-<p><u>3可以接受可关闭的，讨厌强制打断使用的</u></p>
-<p><u>4作为学生党，虽然我很讨厌应用内广告，但是如果可以因为广告而变成免费应用，那我将非常乐意。当然前提是这些广告的设置不会让人厌恶，例如讨厌的弹窗广告，而且如果是让人舒适的广告植入那就更好了。</u></p>
-<p><u>5只要不是太长也不是经常突然弹出，我不反感。</u></p>
-<p><u>6非常讨厌，应用内广告会让我立刻删除这个应用。</u></p>
-<h4 id='q5-您更喜欢哪种应用订阅模式如一次买断会员制还是其他'>Q5. 您更喜欢哪种应用订阅模式？如一次买断、会员制还是其他？</h4>
-<p><u>1不贵的买断吧</u></p>
-<p><u>2一次买断，或者全免费，会员特权不能影响正常使用。</u></p>
-<p><u>3我要白嫖，接收功能升级一次买断付费</u></p>
-<p><u>4作为学生党，我觉得免费最好，如果一定要付费，那么按月或者按年的付费会员制可以接受。</u></p>
-<p><u>5如果做的好的话，我选择终身买断制。</u></p>
-<p><u>6我喜欢会员制。</u></p>
-<h3 id='结束'>结束</h3>
-<h4 id='如果我们的应用程序已经可供下载您会尝试吗'>如果我们的应用程序已经可供下载，您会尝试吗？</h4>
-<p><u>1不会，占内存，只会为了人情世故而不是功能体验下载</u></p>
-<p><u>2不会，对我没用</u></p>
-<p><u>3会，悲观尝试，不行就卸</u></p>
-<p><u>4我会很乐意尝试的，希望它在语音指导的形式上和日程管理的功能上都有让我惊喜的表现。</u></p>
-<p><u>5我挺感兴趣，我会下载来试一试。</u></p>
-<p><u>6我应该会尝试的。</u></p>
-<h4 id='follow-up你选择使用它的原因是什么'>Follow Up：你选择使用它的原因是什么？</h4>
-<p><u>1人情世故捧场</u></p>
-<p><u>2不想用</u></p>
-<p><u>3说不定有用，反正免费还能卸载。</u></p>
-<p><u>4因为它提供的功能目前还没有其他app有完全相同的功能集成，而且我真心认为这个app会改变用户的生活，可以让用户对自己的生活有更强的掌控力，这是非常吸引我的点。</u></p>
-<p><u>5我觉得这是一个比较新型的app，能给我的生活带来便利，提高我的效率。</u></p>
-<p><u>6我觉得它对我还是有一些用处的，前提是那些关键功能都完美实现。</u></p>
-<h3 id='感谢您的回复'><strong>感谢您的回复！</strong></h3>
-<h2 id='survey数据'>survey数据</h2>
-<p><strong>关于情感分析app的使用情况调查</strong></p>
-<p>本小组总共采访了13份数据，统计的人地域分布如下</p>
-<p><img src="./images/background.png" referrerpolicy="no-referrer" alt="background"></p>
-<p>得到的数据如下</p>
-<p>第1题   您现在的工作是？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >政府部门人员</td><td style='text-align:center;' >1</td><td style='text-align:left;' >7.69%</td></tr><tr><td style='text-align:left;' >自由职业者</td><td style='text-align:center;' >2</td><td style='text-align:left;' >15.38%</td></tr><tr><td style='text-align:left;' >待业</td><td style='text-align:center;' >0</td><td style='text-align:left;' >0%</td></tr><tr><td style='text-align:left;' >学生</td><td style='text-align:center;' >10</td><td style='text-align:left;' >76.92%</td></tr><tr><td style='text-align:left;' >其他：</td><td style='text-align:center;' >0</td><td style='text-align:left;' >0%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/1.png" referrerpolicy="no-referrer" alt="1"></p>
-<p>第2题   您使用手机中常用应用程序的频率如何？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >约1小时</td><td style='text-align:center;' >2</td><td style='text-align:left;' >15.38%</td></tr><tr><td style='text-align:left;' >约2小时</td><td style='text-align:center;' >6</td><td style='text-align:left;' >46.15%</td></tr><tr><td style='text-align:left;' >约4小时</td><td style='text-align:center;' >4</td><td style='text-align:left;' >30.77%</td></tr><tr><td style='text-align:left;' >约8小时</td><td style='text-align:center;' >1</td><td style='text-align:left;' >7.69%</td></tr><tr><td style='text-align:left;' >其他：</td><td style='text-align:center;' >0</td><td style='text-align:left;' >0%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/2.png" referrerpolicy="no-referrer" alt="2"></p>
-<p>第3题   您多久会经历一次剧烈的情绪波动或情绪压力？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >很少</td><td style='text-align:center;' >1</td><td style='text-align:left;' >7.69%</td></tr><tr><td style='text-align:left;' >适中</td><td style='text-align:center;' >9</td><td style='text-align:left;' >69.23%</td></tr><tr><td style='text-align:left;' >经常</td><td style='text-align:center;' >3</td><td style='text-align:left;' >23.08%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/3.png" referrerpolicy="no-referrer" alt="3"></p>
-<p>第4题   您认为情绪波动或情绪压力在多大程度上影响您的日常生活？      [滑动条]</p>
-<p>本题答卷总分值：67；平均值为：5.15</p>
-<p>第5题   您面对情绪压力时的自我调节能力如何？      [滑动条]</p>
-<p>本题答卷总分值：85；平均值为：6.54</p>
-<p>第6题   当你遇到情绪波动或情绪压力时，你通常会选择与他人交往吗？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >是</td><td style='text-align:center;' >7</td><td style='text-align:left;' >53.85%</td></tr><tr><td style='text-align:left;' >否</td><td style='text-align:center;' >6</td><td style='text-align:left;' >46.15%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/4.png" referrerpolicy="no-referrer" alt="4"></p>
-<p>第7题   你如何应对情绪压力？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >不处理</td><td style='text-align:center;' >3</td><td style='text-align:left;' >23.08%</td></tr><tr><td style='text-align:left;' >线上发泄</td><td style='text-align:center;' >5</td><td style='text-align:left;' >38.46%</td></tr><tr><td style='text-align:left;' >线下发泄</td><td style='text-align:center;' >4</td><td style='text-align:left;' >30.77%</td></tr><tr><td style='text-align:left;' >其他：</td><td style='text-align:center;' >1</td><td style='text-align:left;' >7.69%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/5.png" referrerpolicy="no-referrer" alt="5"></p>
-<p>第8题   您是否经常使用手机进行日程管理，例如使用备忘录、日历等？您对这种形式的日程管理有什么不满意的地方吗？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >是</td><td style='text-align:center;' >8</td><td style='text-align:left;' >61.54%</td></tr><tr><td style='text-align:left;' >否</td><td style='text-align:center;' >3</td><td style='text-align:left;' >23.08%</td></tr><tr><td style='text-align:left;' >Answer：</td><td style='text-align:center;' >2</td><td style='text-align:left;' >15.38%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/6.png" referrerpolicy="no-referrer" alt="6"></p>
-<p>第9题   您曾经使用过情感分析应用程序吗？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >是</td><td style='text-align:center;' >3</td><td style='text-align:left;' >23.08%</td></tr><tr><td style='text-align:left;' >否</td><td style='text-align:center;' >10</td><td style='text-align:left;' >76.92%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/7.png" referrerpolicy="no-referrer" alt="7"></p>
-<p>第10题   您愿意分享您的社交媒体或短信以获得更准确的情感分析结果吗？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >是</td><td style='text-align:center;' >3</td><td style='text-align:left;' >23.08%</td></tr><tr><td style='text-align:left;' >否</td><td style='text-align:center;' >10</td><td style='text-align:left;' >76.92%</td></tr><tr><td style='text-align:left;' >其他：</td><td style='text-align:center;' >0</td><td style='text-align:left;' >0%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/8.png" referrerpolicy="no-referrer" alt="8"></p>
-<p>第11题   您是否愿意使用应用程序提供的用户支持和投诉渠道来报告与隐私和安全相关的问题？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >是</td><td style='text-align:center;' >7</td><td style='text-align:left;' >53.85%</td></tr><tr><td style='text-align:left;' >否</td><td style='text-align:center;' >6</td><td style='text-align:left;' >46.15%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/9.png" referrerpolicy="no-referrer" alt="9"></p>
-<p>第12题   您对情感分析应用程序的数据存储和保留期限有哪些担忧？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >担心数据被永久存储</td><td style='text-align:center;' >7</td><td style='text-align:left;' >53.85%</td></tr><tr><td style='text-align:left;' >希望有更多关于数据保留的控制选项</td><td style='text-align:center;' >2</td><td style='text-align:left;' >15.38%</td></tr><tr><td style='text-align:left;' >不关心</td><td style='text-align:center;' >4</td><td style='text-align:left;' >30.77%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/10.png" referrerpolicy="no-referrer" alt="10"></p>
-<p>第13题   如果您愿意共享数据，您希望应用程序收集哪些数据？      [多选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >文本信息</td><td style='text-align:center;' >8</td><td style='text-align:left;' >61.54%</td></tr><tr><td style='text-align:left;' >社交媒体账户信息</td><td style='text-align:center;' >5</td><td style='text-align:left;' >38.46%</td></tr><tr><td style='text-align:left;' >地理位置信息</td><td style='text-align:center;' >5</td><td style='text-align:left;' >38.46%</td></tr><tr><td style='text-align:left;' >图片</td><td style='text-align:center;' >6</td><td style='text-align:left;' >46.15%</td></tr><tr><td style='text-align:left;' >音频</td><td style='text-align:center;' >2</td><td style='text-align:left;' >15.38%</td></tr><tr><td style='text-align:left;' >其他：</td><td style='text-align:center;' >0</td><td style='text-align:left;' >0%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/11.png" referrerpolicy="no-referrer" alt="11"></p>
-<p>第14题   你会为你最喜欢的应用程序付费吗？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >会</td><td style='text-align:center;' >8</td><td style='text-align:left;' >61.54%</td></tr><tr><td style='text-align:left;' >不会</td><td style='text-align:center;' >5</td><td style='text-align:left;' >38.46%</td></tr><tr><td style='text-align:left;' >其他：</td><td style='text-align:center;' >0</td><td style='text-align:left;' >0%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/12.png" referrerpolicy="no-referrer" alt="12"></p>
-<p>第15题   你会看应用内的广告吗？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >会</td><td style='text-align:center;' >3</td><td style='text-align:left;' >23.08%</td></tr><tr><td style='text-align:left;' >不会</td><td style='text-align:center;' >10</td><td style='text-align:left;' >76.92%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/13.png" referrerpolicy="no-referrer" alt="13"></p>
-<p>第16题   您认为什么样的APP运营模式更好？      [单选题]</p>
-<figure class='table-figure'><table>
-<thead>
-<tr><th style='text-align:left;' >选项</th><th style='text-align:center;' >小计</th><th style='text-align:left;' >比例</th></tr></thead>
-<tbody><tr><td style='text-align:left;' >买断制（一次付费，终身有效）</td><td style='text-align:center;' >4</td><td style='text-align:left;' >30.77%</td></tr><tr><td style='text-align:left;' >订阅制（按月/年付费）</td><td style='text-align:center;' >2</td><td style='text-align:left;' >15.38%</td></tr><tr><td style='text-align:left;' >免费但有广告</td><td style='text-align:center;' >5</td><td style='text-align:left;' >38.46%</td></tr><tr><td style='text-align:left;' >会员制</td><td style='text-align:center;' >2</td><td style='text-align:left;' >15.38%</td></tr><tr><td style='text-align:left;' >其他：</td><td style='text-align:center;' >0</td><td style='text-align:left;' >0%</td></tr><tr><td style='text-align:left;' >本题有效填写人次</td><td style='text-align:center;' >13</td><td style='text-align:left;' >&nbsp;</td></tr></tbody>
-</table></figure>
-<p><img src="./images/14.png" referrerpolicy="no-referrer" alt="14"></p>
-<h2 id='survey-数据分析'>Survey 数据分析</h2>
-<h3 id='重要发现'>重要发现</h3>
-<ol start='' >
-<li><p><strong>情感分析应用需关注用户隐私和数据安全：</strong></p>
-<ul>
-<li>53.85%的受访者担心数据被永久存储，表明用户对于个人数据的安全性有一定关切。</li>
-<li>23.08%的用户愿意分享社交媒体或短信以获取更准确的情感分析结果，但76.92%的用户不愿意分享，显示用户在隐私权和个人信息控制方面有不同的态度。</li>
-<li>对于应用程序提供的用户支持和投诉渠道，53.85%的用户表示愿意使用，这表明建立明确的隐私保护措施和沟通渠道对用户满意度至关重要。</li>
-
-</ul>
-</li>
-<li><p><strong>用户对日程管理应用有较高的使用率，但对情感分析应用的使用较低：</strong></p>
-<ul>
-<li>61.54%的用户使用手机进行日程管理，这显示了在工作和日常生活中，用户对于日程安排的需求。</li>
-<li>76.92%的用户尚未使用过情感分析应用，这可能表明情感分析应用需要更好地推广和满足用户需求。</li>
-
-</ul>
-</li>
-<li><p><strong>用户在付费和广告方面存在分歧：</strong></p>
-<ul>
-<li>61.54%的用户愿意为他们最喜欢的应用程序付费，这显示了用户对高质量应用的愿意支持。</li>
-<li>76.92%的用户不愿意看应用内广告，这表明用户更倾向于选择无广告的应用体验。</li>
-<li>在运营模式选择上，38.46%的用户认为免费但有广告的模式更好，而30.77%的用户支持买断制（一次付费，终身有效），这反映了用户对于不同运营模式的偏好存在差异。</li>
-
-</ul>
-</li>
-
-</ol>
-<ol start='4' >
-<li><p><strong>大家受到情绪困扰，手机app具有陪伴渡过情绪问题的潜能</strong></p>
-<ul>
-<li>情感波动较轻的人只占据7.69%，其余皆为中度重度受干扰。</li>
-<li>情绪波动或情绪压力影响日常生活的程度平均值为：5.15</li>
-<li>如何应对情绪压力线上发泄占比最高，为38.46%，还有23.08%不发泄者，玩手机成为潜在镇静手段。</li>
-
-</ul>
-</li>
-
-</ol>
-<ol start='5' >
-<li><p><strong>情感分析日程管理app具有潜在市场：</strong></p>
-<ul>
-<li>大家常使用手机进行日程管理，例如使用备忘录、日历等占61.54%</li>
-<li>情感分析应用程序存在缺位，使用过的只占据23.08%</li>
-
-</ul>
-</li>
-
-</ol>
-<ol start='6' >
-<li><p><strong>文本信息收集可行</strong></p>
-<ul>
-<li>允许文本信息收集的用户达到最高61.54%用户允许反馈，过半用户愿意使用应用程序提供的用户支持和投诉渠道来报告与隐私和安全相关的问题，这也是文本收集方式之一</li>
-
-</ul>
-</li>
-
-</ol>
-<h3 id='描述统计数据'>描述统计数据</h3>
-<ol start='' >
-<li><p><strong>职业分布：</strong></p>
-<ul>
-<li>政府部门人员：1 (7.69%)</li>
-<li>自由职业者：2 (15.38%)</li>
-<li>待业：0 (0%)</li>
-<li>学生：10 (76.92%)</li>
-
-</ul>
-<p><strong>总结：</strong> 多数受访者（76.92%）为学生，自由职业者和政府部门人员分别占15.38%和7.69%。</p>
-</li>
-<li><p><strong>手机应用使用频率：</strong></p>
-<ul>
-<li>约1小时：2 (15.38%)</li>
-<li>约2小时：6 (46.15%)</li>
-<li>约4小时：4 (30.77%)</li>
-<li>约8小时：1 (7.69%)</li>
-
-</ul>
-<p><strong>总结：</strong> 最常见的使用时长约为2小时（46.15%），其次是4小时（30.77%）。</p>
-</li>
-<li><p><strong>剧烈情绪波动频率：</strong></p>
-<ul>
-<li>很少：1 (7.69%)</li>
-<li>适中：9 (69.23%)</li>
-<li>经常：3 (23.08%)</li>
-
-</ul>
-<p><strong>总结：</strong> 绝大多数受访者（69.23%）经历适中程度的情绪波动，只有少数（7.69%）很少经历。</p>
-</li>
-
-</ol>
-<h4 id='摘要统计'>摘要统计：</h4>
-<ol start='' >
-<li><p><strong>情绪波动对日常生活的影响：</strong></p>
-<ul>
-<li>平均值：5.15</li>
-
-</ul>
-<p><strong>总结：</strong> 平均而言，受访者认为情绪波动在一定程度上影响他们的日常生活，得分为5.15，总分为67。</p>
-</li>
-<li><p><strong>面对情绪压力的自我调节能力：</strong></p>
-<ul>
-<li>平均值：6.54</li>
-
-</ul>
-<p><strong>总结：</strong> 平均而言，受访者在面对情绪压力时的自我调节能力得分为6.54，总分为85。</p>
-</li>
-
-</ol>
-<h4 id='附加见解'>附加见解：</h4>
-<ol start='' >
-<li><p><strong>社交互动偏好：</strong></p>
-<ul>
-<li>选择与他人交往：7 (53.85%)</li>
-<li>不选择与他人交往：6 (46.15%)</li>
-
-</ul>
-<p><strong>总结：</strong> 稍多数受访者（53.85%）在面对情绪压力时选择与他人交往。</p>
-</li>
-<li><p><strong>情绪压力应对机制：</strong></p>
-<ul>
-<li>不处理：3 (23.08%)</li>
-<li>线上发泄：5 (38.46%)</li>
-<li>线下发泄：4 (30.77%)</li>
-<li>其他：1 (7.69%)</li>
-
-</ul>
-<p><strong>总结：</strong> 最常见的应对机制是在线上发泄（38.46%）。</p>
-</li>
-
-</ol>
-<h3 id='主题和类别'>主题和类别</h3>
-<p>样本中主导的人口统计特征是学生，表明受访者以年轻人为主。对手机应用的使用模式的分析显示，相当数量的参与者在手机上花费约2小时的时间，大多数人更喜欢较短的使用时长。</p>
-<h3 id='出乎意料的事情'>出乎意料的事情</h3>
-<p>出乎意料的发现之一是用户对情感分析应用的使用和隐私问题表现出明显的矛盾态度。尽管有相当大比例的用户表示担心数据永久存储，但多数受访者并未使用过情感分析应用，表明他们在使用此类应用时存在一定的犹豫。这种矛盾反映了用户对新兴技术的谨慎态度，尤其是涉及到敏感个人信息的情感分析。</p>
-<h2 id='interview-数据分析'>Interview 数据分析</h2>
-<h3 id='过程图片'>过程图片</h3>
-<p><img src="./images/process1.png" referrerpolicy="no-referrer" alt="process1"></p>
-<h3 id='最终输出'>最终输出</h3>
-<p><img src="./images/process2.png" referrerpolicy="no-referrer" alt="process2"></p>
-<h3 id='亲和图数字版本'>亲和图数字版本</h3>
-<p><img src="./images/affinity.png" referrerpolicy="no-referrer" alt="affinity"></p>
-<h3 id='描述文字'>描述文字</h3>
-<p>最后的亲和图将35张便利贴分为五部分，每一部分的小主题分别是：用户对情感分析助手的功能需求，用户对服务提供方式的期待，用户对应用内广告的看法，用户对应用数据隐私问题的担忧，用户对应用反馈的看法。最后得出的总主题是：如何设计一个情感分析助手应用程序。从最后的亲和图我们可以得出一些结论：</p>
-<p>1、用户希望情感分析助手提供一些可以解决情绪压力问题的功能，如合理安排日程，替换不喜欢的推送内容等。</p>
-<p>2、大部分用户对于应用服务提供方式希望采用语音和视频等更具有亲和力的形式，也有用户喜欢高效的文字形式。</p>
-<p>3、用户对应用内广告的看法，大部分是可以接受部分合适的广告，反感数量多，强制或者可以弹出的广告。</p>
-<p>4、用户对应用数据隐私问题基本持担忧态度，尤其是隐私数据泄露。</p>
-<p>5、用户对于应用反馈倾向于在官方渠道反馈，一键式反馈和人工实时反馈形式都受用户喜欢。</p>
+<body class='typora-export'><div class='typora-export-content'>
+<div id='write'  class=''><h3 id='flow-model'><strong><span>flow model</span></strong></h3><p><img src="./images/HMW.png" referrerpolicy="no-referrer" alt="HMW"></p><h3 id='hmw-question'><strong><span>HMW question</span></strong></h3><ul><li><span>How might we encourage users to actively participate in emotion data collection on their</span></li><li><span>phones?</span></li><li><span>How might we make the process of emotion tracking seamless and enjoyable for users?</span></li><li><span>How might we improve the accuracy of emotion analysis？</span></li><li><span>How might we minimize false positives or negatives in judging a user&#39;s emotional state?</span></li><li><span>How might we tailor emotion management suggestions to each user&#39;s unique emotional</span></li><li><span>needs?</span></li><li><span>How might we consider individual preferences and lifestyle factors when providing</span></li><li><span>recommendations?</span></li><li><span>How might we address user privacy concerns while collecting sufficient data for accurate</span></li><li><span>emotion analysis?</span></li><li><span>How might we transparently communicate the benefits of data collection to alleviate privacy</span></li><li><span>concerns?</span></li><li><span>How might we motivate users to regularly engage with the app for sustained emotional well</span></li><li><span>being?</span></li><li><span>How might we design features that make the app an integral part of the user&#39;s daily routine?</span></li><li><span>How might we design the user interface and interactions to be empathetic and supportive</span></li><li><span>during sensitive moments?</span></li><li><span>How might we ensure that users feel understood and cared for through the app&#39;s</span></li><li><span>suggestions and feedback?</span></li></ul><h3 id='problem-statement'><strong><span>Problem Statement</span></strong></h3><p><span>As people&#39;s material lives become more and more abundant, coupled with the continuous complexity of science and technology, people&#39;s spiritual life status fluctuates greatly. While seeking material needs, people begin to pay more attention to seeking from within. The emotional needs of users cannot be underestimated. There is no app in the market today that has a global monitoring system. By monitoring the use of each application, it can overall judge the user&#39;s emotional status and give and provide suggestions and management to help people better control their emotions and life. Therefore, we proposed to design an app that can monitor people&#39;s emotions globally. It monitors the user&#39;s various activities on the mobile phone, determines the user&#39;s current emotional state, and gives suggestions and guidance. How to improve the performance of the app so that more people can benefit is also a question.</span></p><h3 id='persona'><span>Persona</span></h3><h4 id='persona1'><span>Persona1</span></h4><p><img src="./images/Persona1.png" referrerpolicy="no-referrer" alt="Persona1"></p><h4 id='persona2'><span>Persona2</span></h4><p><img src="./images/Persona2.png" referrerpolicy="no-referrer" alt="Persona2"></p><h3 id='storyboard'><span>Storyboard</span></h3><h4 id='storyboard1'><span>Storyboard1</span></h4><p><img src="./images/Storyboard1.png" referrerpolicy="no-referrer" alt="Storyboard1"></p><h4 id='storyboard2'><span>Storyboard2</span></h4><p><img src="./images/Storyboard2.png" referrerpolicy="no-referrer" alt="Storyboard2"></p><h3 id='solution-proposal'><strong><span>Solution Proposal</span></strong></h3><p><span>Emotional problems may often lead to physical health problems, so when  designing the functions of the emotion analysis assistant, you can set a health-related functional  block or link with other apps to solve this problem.</span></p><p><span>If a user feels anxious or uneasy at a certain time of the day, the assistant can automatically adjust the schedule to schedule more relaxing or enjoyable tasks at that time to help the user relieve emotional stress. If the user is feeling excited or energized, it can offer more challenging tasks or schedules. Users can make suggestions to developers or product managers through feedback or Q&amp;A systems. The product manager promotes the app through advertising and other methods. The app data is stored in the database to help developers better improve the performance of the app. All of this adds up to a complete closed loop that helps the app improve. And besides, when designing the function of emotion analysis assistant, the next todolist function board can be linked to emotional adjustment suggestions and work arrangement suggestions, to cope with the work in the most appropriate physical and mental state.</span></p><p>&nbsp;</p></div></div>
 </body>
 </html>
