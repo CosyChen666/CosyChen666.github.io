@@ -1,3 +1,63 @@
+# 用户反馈&&解决方案
+
+## overall statement
+
+We invited developers, other executives, clients, etc. to provide critique feedback on our product prototype. They raised questions and made some suggestions in terms of interface design, technology, business goals, user process feasibility, etc.
+
+## critique feedback and solutions
+
+#### UI design
+
+1. **Question:** The opening interface is very unique and different from regular APPs, but is it too simple? Have you considered adding some functional options?
+
+   **Answer:** The picture is clear and concise, giving a good first impression and helping users have a good mood. At the same time, this interface has a very personal style, which can attract attention and remain unique.
+
+   **Follow-up:** Having only one wake-up button is irrelevant and has no real function. It may increase the user's burden and destroy the user experience.
+
+   **Answer:** In order for the app to win in the competition among similar software markets, it must remain unique, so we feel there is no need to change it.
+
+2. **Problem:** The word "wake up" on the opening interface may give users an experience of starting a game, which is not too serious and does not feel consistent with the identity of an emotional assistant.
+
+   **Answer:** On the contrary, just as many games will choose such words, we think this will give users a better experience.
+
+3. **Question:** Although the app's main interactive platform page gives users many options for interaction, is it a bit complicated and redundant to operate, which increases the user's burden?
+
+   **Answer:** We feel that these three methods each have their own needs, and each is irreplaceable. But there is indeed redundancy and unreasonableness in operation. We should automatically select the output form based on user input or let the user choose the output form. Instead of first letting the user choose a way to limit them to a fixed mode.
+
+   **Follow-up:** Video and text can perfectly complete the task of voice. Perhaps the voice option can be removed.
+
+   **Answer:** Judging from the experience of apps such as WeChat, voice is still necessary. It is more convenient than text input and simpler than video in some cases. Moreover, during user research, we found that users have special expectations for voice.
+
+4. **Problem:** Since the recommended schedule has been imported into the calendar and memo on the schedule page, the user can view it directly, and the interface still displays whether the schedule table is redundant.
+
+   **Answer:** It is indeed redundant and can be removed.
+
+#### Technical feasibility
+
+1. **Question:** Everyone’s emotional state is different and they want different responses. Is this technically possible? Whether the existing model can truly analyze the user's true emotional state and give reasonable suggestions.
+
+​        **Answer:** With the rise of large models, the latest technology can achieve relatively high accuracy. So our idea is technically feasible.
+
+2. **Question:** If the user's reply contains a lot of text and other forms, can the sentiment analysis assistant automatically provide a reasonable and beautiful layout output?
+
+​       **Answer:** We checked the information and found that there is corresponding research that can solve this technical problem.
+
+#### Alignment of design or prototype with business goals
+
+**Question:** When originally designed, there was a function that could provide voice packages for some users' favorite voice assistants, but this function was not reflected in the prototype. Does the real app implement this function?
+
+ **Answer: **Don't worry, this cannot be described due to space limitations, but this is the request of many users, and we have implemented it.
+
+#### User flow availability
+
+**Question:** But looking at the prototype, the user process is not very clear, and there is no overall introduction and guidance of the user process.
+
+**Answer:** This was an oversight on our part. We will provide clear user processes in the subsequent process.
+
+### Expected improvement
+
+Based on these critique feedback, we made some improvements to the prototype. First of all, on the UI, we retained the startup interface and redesigned the subsequent interactive interface to make it better interact with users and provide users with a better experience. We held discussions with participants and determined that our technology was feasible to design such an emotional assistant. We always keep the real design consistent with our original goals. Finally, we will explain the user process in order to give users a better experience.
+
 # 情感分析app分析
 
 本小组由史惠敏、王乾润、苗琳瑜采访了6位受访者，关于他们对情感分析app的分析情况，由陈炜麟对这些采访稿进行汇总，并发布survey调查问卷，最后汇总制作成网页。
